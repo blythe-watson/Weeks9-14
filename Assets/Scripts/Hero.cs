@@ -45,6 +45,12 @@ public class Hero : MonoBehaviour
         //get the absolute (non-negative) value of direction, which will return as either 0 or 1, meaning static or moving
         animator.SetFloat("movement", Mathf.Abs(direction));
 
+        //if you can run, transform your speed by direction (which can be 0) times your speed times delta time
+        if (canRun)
+        {
+            transform.position += transform.right * direction * speed * Time.deltaTime;
+        }
+
         //for the attack animation, we have a trigger
         //when you click, activate the trigger and disable your ability to run
         if (Input.GetMouseButtonDown(0))
@@ -53,10 +59,10 @@ public class Hero : MonoBehaviour
             canRun = false;
         }
 
-        //if you can run, transform your speed by direction (which can be 0) times your speed times delta time
-        if (canRun)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            transform.position += transform.right * direction * speed * Time.deltaTime;
+            animator.SetTrigger("jump");
+            //transform.position += transform.up;
         }
 
     }
@@ -69,4 +75,10 @@ public class Hero : MonoBehaviour
         Debug.Log("Attack animation is finished, boss!");
         canRun = true;
     }
+
+    public void Steppy()
+    {
+        Debug.Log("tippy tappy");
+    }
+
 }
