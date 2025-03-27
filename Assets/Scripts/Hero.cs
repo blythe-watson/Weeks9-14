@@ -8,8 +8,14 @@ public class Hero : MonoBehaviour
     //when talking about the sprite renderer and animation attached to the component that this script is on, these are the terms we'll use to address them
     SpriteRenderer sr;
     Animator animator;
+    AudioSource audio;
     public float speed = 6;
     public bool canRun = true;
+
+    //make an array for the footstep sounds
+    public AudioClip[] footsteps;
+    public AudioClip step1;
+
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +23,7 @@ public class Hero : MonoBehaviour
         //script, please be aware that there is a sprite rendere and an animator on the component you're on, and that's what these terms refer to
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-
+        audio = GetComponent<AudioSource>(); 
     }
 
     // Update is called once per frame
@@ -40,10 +46,19 @@ public class Hero : MonoBehaviour
             sr.flipX = true;
         }
 
+
         //we attached an animator component to the hero which has a float parameter named movement.
         //some transitions using movement rely on whether it is 0 or greater than 0.1.
         //get the absolute (non-negative) value of direction, which will return as either 0 or 1, meaning static or moving
         animator.SetFloat("movement", Mathf.Abs(direction));
+
+        //if you can run, transform your speed by direction (which can be 0) times your speed times delta time
+        if (canRun)
+        {
+            transform.position += transform.right * direction * speed * Time.deltaTime;
+        }
+
+
 
         //for the attack animation, we have a trigger
         //when you click, activate the trigger and disable your ability to run
@@ -53,10 +68,10 @@ public class Hero : MonoBehaviour
             canRun = false;
         }
 
-        //if you can run, transform your speed by direction (which can be 0) times your speed times delta time
-        if (canRun)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            transform.position += transform.right * direction * speed * Time.deltaTime;
+            animator.SetTrigger("jump");
+            //transform.position += transform.up;
         }
 
     }
@@ -69,4 +84,13 @@ public class Hero : MonoBehaviour
         Debug.Log("Attack animation is finished, boss!");
         canRun = true;
     }
+
+    public void Steppy()
+    {
+        Debug.Log("tippy tappy");
+        //audio.PlayOneShot(step1);
+        int randomNumber = Random.Range(0, footsteps.Length);
+        audio.PlayOneShot(footsteps[randomNumber]);
+    }
+
 }
