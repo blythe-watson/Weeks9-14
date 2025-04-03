@@ -19,7 +19,8 @@ public class ClickWalkHero : MonoBehaviour
     public AudioClip[] footsteps;
     public AudioClip step1;
 
-    
+
+    public Vector3 mousePos;
 
     // Start is called before the first frame update
     void Start()
@@ -58,12 +59,20 @@ public class ClickWalkHero : MonoBehaviour
         animator.SetFloat("movement", Mathf.Abs(direction));
 
         //if you can run, transform your speed by direction (which can be 0) times your speed times delta time
-        if (canRun)
+        /*if (canRun)
         {
             transform.position += transform.right * direction * speed * Time.deltaTime;
+        }*/
+
+        
+        Vector2 path = mousePos - transform.position;
+
+        if (Input.GetMouseButtonDown(0) && canRun == true)
+        {
+            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+            //transform.position
         }
-
-
 
         //for the attack animation, we have a trigger
         //when you click, activate the trigger and disable your ability to run
