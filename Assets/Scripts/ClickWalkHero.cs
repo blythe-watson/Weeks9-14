@@ -1,21 +1,25 @@
-using JetBrains.Annotations;
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : MonoBehaviour
+
+public class ClickWalkHero : MonoBehaviour
 {
     //when talking about the sprite renderer and animation attached to the component that this script is on, these are the terms we'll use to address them
     SpriteRenderer sr;
     Animator animator;
     AudioSource audio;
+    CinemachineImpulseSource impulseSource;
     public float speed = 6;
     public bool canRun = true;
+
 
     //make an array for the footstep sounds
     public AudioClip[] footsteps;
     public AudioClip step1;
 
+    
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +27,8 @@ public class Hero : MonoBehaviour
         //script, please be aware that there is a sprite renderer and an animator on the component you're on, and that's what these terms refer to
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        audio = GetComponent<AudioSource>(); 
+        audio = GetComponent<AudioSource>();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     // Update is called once per frame
@@ -36,12 +41,12 @@ public class Hero : MonoBehaviour
         //sr.flipX = direction < 0;
 
         //if direction is greater than 0.1, don't flip X, since the sprite faces right by default
-        if(direction > 0.1)
+        if (direction > 0.1)
         {
             sr.flipX = false;
         }
         //if direction is less than -0.1, meaning left, flip X in the sprite renderer
-        if(direction < -0.1)
+        if (direction < -0.1)
         {
             sr.flipX = true;
         }
@@ -62,14 +67,16 @@ public class Hero : MonoBehaviour
 
         //for the attack animation, we have a trigger
         //when you click, activate the trigger and disable your ability to run
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("hiyah!");
             animator.SetTrigger("attack");
             canRun = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            Debug.Log("leap!");
             animator.SetTrigger("jump");
             //transform.position += transform.up;
         }
@@ -91,6 +98,8 @@ public class Hero : MonoBehaviour
         //audio.PlayOneShot(step1);
         int randomNumber = Random.Range(0, footsteps.Length);
         audio.PlayOneShot(footsteps[randomNumber]);
+        impulseSource.GenerateImpulse();
     }
 
 }
+
