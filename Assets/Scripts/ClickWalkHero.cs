@@ -69,6 +69,7 @@ public class ClickWalkHero : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && canRun == true)
         {
+            //add another layer of if statement here to check the tiles
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
             //transform.position
