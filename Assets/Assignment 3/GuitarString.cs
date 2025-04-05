@@ -37,7 +37,7 @@ public class GuitarString : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //the original position of the string; it will return to this when finished wiggling
+        //the original position of the string; it will return to this when finished wiggling.
         offset = new Vector2(transform.localPosition.x, transform.localPosition.y);
 
     }

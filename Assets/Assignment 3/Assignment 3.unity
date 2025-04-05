@@ -179,9 +179,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1699993786}
-          m_TargetAssemblyTypeName: UkeBody, Assembly-CSharp
-          m_MethodName: PlayC
+        - m_Target: {fileID: 359337441}
+          m_TargetAssemblyTypeName: GuitarString, Assembly-CSharp
+          m_MethodName: OnStrummed
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -371,14 +371,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pitch: 0
+  duration: 2
+  amplitude: 0.005
+  frequency: 40
   snapped: 0
-  G: 71
-  C: 67
-  E: 69
-  A: 65
+  note: E
   Strummed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1699993786}
+        m_TargetAssemblyTypeName: UkeBody, Assembly-CSharp
+        m_MethodName: OnStrummed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &47722457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,14 +1076,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pitch: 0
+  duration: 2
+  amplitude: 0.005
+  frequency: 40
   snapped: 0
-  G: 71
-  C: 67
-  E: 69
-  A: 65
+  note: C
   Strummed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1699993786}
+        m_TargetAssemblyTypeName: UkeBody, Assembly-CSharp
+        m_MethodName: OnStrummed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &413062417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,6 +1230,113 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 413062417}
   m_CullTransparentMesh: 1
+--- !u!1 &413267969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 413267971}
+  - component: {fileID: 413267970}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &413267970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413267969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cef131d3c02687943973d973611db117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Muting:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 469876258}
+        m_TargetAssemblyTypeName: GuitarString, Assembly-CSharp
+        m_MethodName: OnMute
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 359337441}
+        m_TargetAssemblyTypeName: GuitarString, Assembly-CSharp
+        m_MethodName: OnMute
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 35412912}
+        m_TargetAssemblyTypeName: GuitarString, Assembly-CSharp
+        m_MethodName: OnMute
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 674006672}
+        m_TargetAssemblyTypeName: GuitarString, Assembly-CSharp
+        m_MethodName: OnMute
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1699993786}
+        m_TargetAssemblyTypeName: UkeBody, Assembly-CSharp
+        m_MethodName: OnMute
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &413267971
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413267969}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.24000025, y: 0.73999995, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &413294030
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,14 +1527,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pitch: 0
+  duration: 2
+  amplitude: 0.005
+  frequency: 40
   snapped: 0
-  G: 71
-  C: 67
-  E: 69
-  A: 65
+  note: G
   Strummed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1699993786}
+        m_TargetAssemblyTypeName: UkeBody, Assembly-CSharp
+        m_MethodName: OnStrummed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &536779595
 GameObject:
   m_ObjectHideFlags: 0
@@ -2474,14 +2617,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pitch: 0
+  duration: 2
+  amplitude: 0.005
+  frequency: 40
   snapped: 0
-  G: 71
-  C: 67
-  E: 69
-  A: 65
+  note: A
   Strummed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1699993786}
+        m_TargetAssemblyTypeName: UkeBody, Assembly-CSharp
+        m_MethodName: OnStrummed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &718379269
 GameObject:
   m_ObjectHideFlags: 0
@@ -2977,9 +3132,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1699993786}
-          m_TargetAssemblyTypeName: UkeBody, Assembly-CSharp
-          m_MethodName: PlayG
+        - m_Target: {fileID: 469876258}
+          m_TargetAssemblyTypeName: GuitarString, Assembly-CSharp
+          m_MethodName: OnStrummed
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4696,9 +4851,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1699993786}
-          m_TargetAssemblyTypeName: UkeBody, Assembly-CSharp
-          m_MethodName: PlayE
+        - m_Target: {fileID: 35412912}
+          m_TargetAssemblyTypeName: GuitarString, Assembly-CSharp
+          m_MethodName: OnStrummed
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5227,9 +5382,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1699993786}
-          m_TargetAssemblyTypeName: UkeBody, Assembly-CSharp
-          m_MethodName: PlayA
+        - m_Target: {fileID: 674006672}
+          m_TargetAssemblyTypeName: GuitarString, Assembly-CSharp
+          m_MethodName: OnStrummed
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5673,3 +5828,4 @@ SceneRoots:
   - {fileID: 1904966325}
   - {fileID: 1327617792}
   - {fileID: 1182139809}
+  - {fileID: 413267971}
