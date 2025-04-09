@@ -8,7 +8,9 @@ public class UkeBody : MonoBehaviour
     //the uke body is in charge of all the actual audio
 
     AudioSource audio;
-    public AudioClip[] clips; 
+    //public AudioClip[] clips;
+
+    public AudioSource[] sources;
 
 
     // Start is called before the first frame update
@@ -52,11 +54,12 @@ public class UkeBody : MonoBehaviour
     public void OnStrummed(GuitarStringData data)
     {
         //put the name of the note through the machine from above to turn it into a number, call that number clip
-        var clip = clips[GetIndex(data.Note)];
+        //var clip = clips[GetIndex(data.Note)];
+        var source = sources[GetIndex(data.Note)];
 
-        
+        source.pitch = data.Pitch;
         //play the clip corresponding in the array
-        audio.PlayOneShot(clip);
+        source.Play(0);
         Debug.Log(data.Note);
     }
 
