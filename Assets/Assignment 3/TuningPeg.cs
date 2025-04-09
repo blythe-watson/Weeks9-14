@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class TuningPeg : MonoBehaviour
 {
     public float increment = 0.1f;
-    public float value;
+    public float value = 1;
     public UnityEvent<float> Tuned;
 
     // Start is called before the first frame update
