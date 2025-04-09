@@ -1,6 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
+using Unity.Collections.LowLevel.Unsafe;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
+using static UnityEditor.PlayerSettings;
+using UnityEngine.Assertions;
+using UnityEngine.XR;
 
 public class UkeBody : MonoBehaviour
 {
@@ -8,8 +16,13 @@ public class UkeBody : MonoBehaviour
     //the uke body is in charge of all the actual audio
 
     AudioSource audio;
-    //public AudioClip[] clips;
 
+    //public AudioClip[] clips;
+    public AudioClip tuneUp;
+    //public AudioClip tuneDown;
+
+    //I used to have an array of clips but then I realized that wouldn't work if I wanted to change the pitch of each string separately
+    //so now I have an array of audio sources
     public AudioSource[] sources;
 
 
@@ -53,12 +66,13 @@ public class UkeBody : MonoBehaviour
     //when this is invoked by the strummed event on the string, it receives the guitarstringdata
     public void OnStrummed(GuitarStringData data)
     {
-        //put the name of the note through the machine from above to turn it into a number, call that number clip
+        //put the name of the note through the machine from above to turn it into a number, call that number in the audiosource array
+        //since you can't change the pitch of an individual clip. maybe you can but I'd probably need some new unity addon or whatever. like. naw man I'm tired
         //var clip = clips[GetIndex(data.Note)];
         var source = sources[GetIndex(data.Note)];
 
         source.pitch = data.Pitch;
-        //play the clip corresponding in the array
+        //play the audioSource corresponding in the array
         source.Play(0);
         Debug.Log(data.Note);
     }
@@ -68,15 +82,35 @@ public class UkeBody : MonoBehaviour
     //this stops the audio at the same time as the string wiggling
     public void OnMute()
     {
-        audio.Stop();
-        Debug.Log("stopping audio");
-        //audio.
+        for(int i = 0; i < sources.Length; i++)
+        {
+            sources[i].Stop();
+            Debug.Log("stopping audio");
+            //audio.
+        }
+
     }
 
 
-    /*public void OnTuned(float value)
+   /* I met a traveller from an antique land,
+    Who said— “Two vast and fruitless attempts at sound
+    Stand in the Uke script. . . .Near them, on the sand,
+    Half sunk a shattered audioClip lies, whose frown,
+    And wrinkled lip, and sneer of cold command,
+    Tell that its sculptor well those passions read
+    Which yet survive, stamped on these lifeless things,
+    The hand that mocked them, and the heart that fed;
+    And on the pedestal, these words appear:
+    My name is void OnTuned, King of Kings;
+    Look on my Works, ye Mighty, and despair!
+    Nothing beside remains.Round the decay
+    Of that colossal Wreck, boundless and bare
+    The lone and level sands stretch far away.”*/
+
+
+   /* public void OnTuned(float value)
     {
-        audio.PlayOneShot()
+        audio.PlayOneShot(tuneUp);
     }*/
 
     /*public void PlayG()

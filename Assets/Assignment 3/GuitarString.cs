@@ -6,9 +6,14 @@ using UnityEngine.Events;
 
 public class GuitarString : MonoBehaviour
 {
+    //needed a hard reference to remove the listener since for some reason RemoveListener and RemoveAllListeners weren't working?
+    public UkeBody body;
+
     //to keep track of how tight the string is. when it's too tight or loose it will snap
     //this specific value doesn't affect the pitch of the notes, that's ukebody's job
     public float pitch = 1;
+    public float maxPitch = 2;
+    public float minPitch = 0.2f;
 
     //how long the string will wiggle when strummed
     public float duration = 2;
@@ -32,7 +37,11 @@ public class GuitarString : MonoBehaviour
     //GuitarStringData is something I set up below that takes a note name and a pitch integer
     public UnityEvent<GuitarStringData> Strummed;
 
+    //gets called when the string gets too tight
+    public UnityEvent<GuitarStringData> Snapped;
 
+    //so I can turn off the string's sprite later
+    public SpriteRenderer sprite;
     
     // Start is called before the first frame update
     void Start()
@@ -40,6 +49,7 @@ public class GuitarString : MonoBehaviour
         //the original position of the string; it will return to this when finished wiggling.
         offset = new Vector2(transform.localPosition.x, transform.localPosition.y);
 
+        Strummed.AddListener(body.OnStrummed);
     }
 
     // Update is called once per frame
@@ -49,16 +59,36 @@ public class GuitarString : MonoBehaviour
     }
 
 
-    //this gets invoked by tuning pegs to change the value of pitch sent to the uke body
-    //why isn't this grabbing the increment from tuning peg?
+    //when the tuning pegs invoke tuned, this changes the string's value of pitch and activates onpitchchanged
     public void ChangePitch(float value)
     {
         pitch = value;
+        OnPitchChanged();
+    }
+
+    //this function checks to see if the pitch is outside of a certain threshold, and activates snapped if it is
+    public void OnPitchChanged()
+    {
+        if(pitch > maxPitch || pitch < minPitch)
+        {
+            //remove the ukebody as a listener - can no longer play audio
+            Strummed.RemoveListener(body.OnStrummed);
+            snapped = true;
+            //turn off that string sprite
+            sprite.enabled = false;
+            //invoke that snapped event
+            Snapped.Invoke(new GuitarStringData(note, pitch));
+        }
     }
 
     //this gets called by a UI component when the mouse goes over the strings
+    //if the string is snapped, the coroutine does not run at all
     public void OnStrummed()
     {
+        if (snapped)
+        {
+            return;
+        }
         //if the coroutine is active, call the muting function to cut the sound so you can play the sound again
         if (coroutine != null)
         {

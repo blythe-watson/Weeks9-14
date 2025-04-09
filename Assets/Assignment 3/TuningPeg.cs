@@ -9,6 +9,7 @@ public class TuningPeg : MonoBehaviour
     public float value = 1;
     public UnityEvent<float> Tuned;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +25,8 @@ public class TuningPeg : MonoBehaviour
 
 
     //up buttons activate the tighten function, down buttons activate the loosen function. Both functions are located on the pegs
-    //both functions will assign a value to increment, then send increment to both ukebody and guitarstring
-    //both will add increment to their current pitch
+    //both functions will alter value by increment, then send value to both ukebody and guitarstring
+    //both will change their current pitch by value
     //guitarstring uses pitch to keep track of how tight it is
     //ukebody uses pitch to know what pitch it should play a note at
     public void Tighten()
