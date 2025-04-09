@@ -53,6 +53,8 @@ public class UkeBody : MonoBehaviour
     {
         //put the name of the note through the machine from above to turn it into a number, call that number clip
         var clip = clips[GetIndex(data.Note)];
+
+        
         //play the clip corresponding in the array
         audio.PlayOneShot(clip);
         Debug.Log(data.Note);
@@ -67,6 +69,12 @@ public class UkeBody : MonoBehaviour
         Debug.Log("stopping audio");
         //audio.
     }
+
+
+    /*public void OnTuned(float value)
+    {
+        audio.PlayOneShot()
+    }*/
 
     /*public void PlayG()
     {

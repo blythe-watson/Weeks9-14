@@ -51,9 +51,9 @@ public class GuitarString : MonoBehaviour
 
     //this gets invoked by tuning pegs to change the value of pitch sent to the uke body
     //why isn't this grabbing the increment from tuning peg?
-    public void ChangePitch(float increment)
+    public void ChangePitch(float value)
     {
-        pitch += increment;
+        pitch = value;
     }
 
     //this gets called by a UI component when the mouse goes over the strings
